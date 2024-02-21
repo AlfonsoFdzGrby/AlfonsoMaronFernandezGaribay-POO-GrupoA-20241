@@ -1,4 +1,4 @@
-public class Tarea3U2 {
+public class Main {
     public static void main(String[] args) throws Exception {
         System.out.println("--------------------------------");
         System.out.println(" P E O P L E   D A T A ");
