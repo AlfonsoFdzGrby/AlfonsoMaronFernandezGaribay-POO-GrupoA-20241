@@ -17,5 +17,5 @@
         - Calcular los impuestos = dividendos * (porcentajeImpuesto / 100)
         - Si los impuestos son mayores que la exención retornar los impuestos menos la exención, sino retornar 0.
 
-Ing. Eder Rivera Cisneros
-Alfonso Marón Fernández Garibay
+- Ing. Eder Rivera Cisneros
+- Alfonso Marón Fernández Garibay
