@@ -24,9 +24,10 @@ Se deben proporcionar los siguientes métodos públicos:
     - **reducirStock(int cantidad):** Reduce el stock del producto en la cantidad especificada, con validacón para asegurarse de que la cantidad sea mayor que cero y menor o igual al stock actual.
 
 Además, se deben incluir las siguientes validaciones en los setters:
-    - El precio y el stock no pueden ser negativos.
-    - El nombre no puede ser nulo.
-    - La cantidad a reducir del stock debe ser menor o igual al stock actual.
+- El precio y el stock no pueden ser negativos.
+- El nombre no puede ser nulo.
+- La cantidad a reducir del stock debe ser menor o igual al stock actual.
 
-Ing. Eder Rivera Cisneros
+Ing. Eder Rivera Cisneros  
+
 Alfonso Marón Fernández Garibay
