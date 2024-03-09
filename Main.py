@@ -4,13 +4,7 @@ from Employee import Employee
 from Bank import Bank
 from BankAccount import BankAccount
 
-
-def clear_screen():
-    os.system('cls')
-
-
 def print_header(header):
-    clear_screen()
     print("=========================================================")
     print(header)
     print("=========================================================")
