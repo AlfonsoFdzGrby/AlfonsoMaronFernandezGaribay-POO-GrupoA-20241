@@ -1,6 +1,5 @@
 import java.util.*;
 
-import java.io.IOException;
 public class Main {
     public static Bank bank = new Bank();
     public static Scanner sc = new Scanner(System.in);
@@ -10,14 +9,9 @@ public class Main {
     public static float funds=0;
     public static int opt;
 
-    public static void cls() throws IOException, InterruptedException {
-        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-    }
-
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) {
         bank.storeUser(new Employee('A', "User1", 15000, 123456789));
         while(true){
-            cls();
             printheader("BANK");
             System.out.println("Select an option:");
             System.out.println("1. Log in");
@@ -31,11 +25,9 @@ public class Main {
     
             switch (opt) {
                 case 1:
-                    cls();
                     logIn();
                     break; 
                 case 2:
-                    cls();
                     signUp();
                     break;
                 case 3:
@@ -48,7 +40,7 @@ public class Main {
         }
     }
         
-    public static void executive() throws IOException, InterruptedException {
+    public static void executive() {
         while(true){
             printheader("BANK EXECUTIVE OPTIONS");
             System.out.println("1. List users registered in Bank");
@@ -102,7 +94,7 @@ public class Main {
         }
     }
 
-    public static void signUp() throws IOException, InterruptedException {
+    public static void signUp() {
         printheader("SIGN UP");
         System.out.println("To create your new account, please fill up the next data:");
         System.out.print(">> Name: ");
@@ -179,7 +171,7 @@ public class Main {
         sc.nextLine();
     }
 
-    public static void logIn() throws IOException, InterruptedException {
+    public static void logIn() {
         int acID;
         printheader("LOG IN");
         while(true){
@@ -251,7 +243,6 @@ public class Main {
                     break;
             
                 case 4:
-                    cls();
                     printheader("ACCOUNT INFO");
                     System.out.println(user.getAccount(acID).getAccountInfo());
                     System.out.println("Press enter to return to account settings...");
@@ -278,7 +269,7 @@ public class Main {
 
     }
 
-    public static void withdrawMoney(Employee user, int id) throws IOException, InterruptedException {
+    public static void withdrawMoney(Employee user, int id) {
         printheader("WITHDRAW MONEY");
         while(true){
             System.out.println("Please enter the amount to widthraw: ");
@@ -295,7 +286,7 @@ public class Main {
         }   
     }
 
-    public static void depositMoney(Employee user, int id) throws IOException, InterruptedException {
+    public static void depositMoney(Employee user, int id) {
         printheader("DEPOSIT MONEY");
         while (true) {
             System.out.println("Please enter the amount to deposit");
@@ -312,7 +303,7 @@ public class Main {
         }
     }
 
-    public static void changeType(Employee user, int id) throws IOException, InterruptedException {
+    public static void changeType(Employee user, int id) {
         printheader("CHANGE ACCOUNT TYPE");
         System.out.println("Current account type: " + user.getAccount(id).getType());
         while(true){
@@ -332,7 +323,7 @@ public class Main {
         sc.nextLine();
     }
 
-    public static void createNewAccount(Employee user) throws IOException, InterruptedException {
+    public static void createNewAccount(Employee user) {
         printheader("CREATE NEW ACCOUNT");
         System.out.println("There are several account types you can create, which are:");
         System.out.println("TYPE A:");
@@ -404,8 +395,7 @@ public class Main {
         sc.nextLine();
     }
 
-    public static void printheader(String header) throws IOException, InterruptedException {
-        cls();
+    public static void printheader(String header) {
         System.out.println("=========================================================");
         System.out.println(header);
         System.out.println("=========================================================");
