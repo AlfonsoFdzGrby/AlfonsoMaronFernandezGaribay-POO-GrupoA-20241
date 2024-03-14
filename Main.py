@@ -13,7 +13,6 @@ testUser.setID(1234)
 library.appendUserToList(testUser)
 
 def printHeader(header):
-    os.system('cls')
     print("================================================")
     print(header)
     print("================================================")
