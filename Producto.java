@@ -43,6 +43,10 @@ public class Producto {
         return quitado;
     }
 
+    protected int getStock(){
+        return stock;
+    }
+
     /* 
      * Atributos
      * 

@@ -5,12 +5,6 @@ public class Sistema {
     private final String contraseña = "Psw/8.";
     Tienda tienda = new Tienda();
 
-    private void printHeader(String header){
-        System.out.println("===================================================");
-        System.out.println(header);
-        System.out.println("===================================================");
-    }
-
     public void ejecutarPrograma(){
         printHeader("BIENVENIDO");
         while(true){
@@ -52,39 +46,9 @@ public class Sistema {
 
             switch (opc) {
                 case 1:
-                    printHeader("REGISTRAR PRODUCTO");
-                    System.out.println("Seleccione el producto a registrar:");
-                    System.out.println("1. Limpieza");
-                    System.out.println("2. Alimento");
-                    System.out.println("3. Electrodoméstico");
-                    System.out.println("4. Maquillaje");
-                    System.out.println("5. Volver al menú principal");
-                    System.out.print(">> ");
-                    subopc = sc.nextInt();
-                    sc.nextLine();
-
-                    switch (subopc) {
-                        case 1:
-                            tienda.registrarProductoLimpieza();
-                            break;
-
-                        case 2:
-                            tienda.registrarProductoAlimento();
-                            break;
-
-                        case 3:
-                            tienda.registrarProductoElectrodomestico();
-                            break;
-
-                        case 4:
-                            tienda.registrarProductoMaquillaje();
-                            break;
-                    
-                        default:
-                            break;
-                    }
+                    tienda.registrarProducto();
                     break;
-            
+
                 case 2:
                     tienda.registrarCliente();
                     break;
@@ -98,15 +62,15 @@ public class Sistema {
                     break;
             
                 case 5:
-                    //tienda.eliminarProducto();
+                    tienda.eliminarProducto();
                     break;
             
                 case 6:
-                    //tienda.eliminarCliente();
+                    tienda.eliminarCliente();
                     break;
             
                 case 7:
-                    //tienda.añadirStock();
+                    tienda.añadirStock();
                     break;
             
                 case 8:
@@ -125,6 +89,11 @@ public class Sistema {
                     break;
             }
         }
-
+    }
+    
+    private void printHeader(String header){
+        System.out.println("===================================================");
+        System.out.println(header);
+        System.out.println("===================================================");
     }
 }
