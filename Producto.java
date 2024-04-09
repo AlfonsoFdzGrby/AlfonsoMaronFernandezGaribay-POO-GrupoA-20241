@@ -47,6 +47,10 @@ public class Producto {
         return stock;
     }
 
+    public double getPrecio(){
+        return precio;
+    }
+
     /* 
      * Atributos
      * 

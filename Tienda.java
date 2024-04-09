@@ -193,6 +193,121 @@ public class Tienda {
         }
     }
 
+    public void quitarStock(){
+        printHeader("QUITAR STOCK");
+        int opc = seleccionDeProducto();
+        switch (opc) {
+            case 1:
+                quitarStockLimpieza();
+                break;
+        
+            case 2:
+                quitarStockAlimento();
+                break;
+        
+            case 3:
+                quitarStockElectrodomestico();
+                break;
+        
+            case 4:
+                quitarStockMaquillaje();
+                break;
+        
+            default:
+                break;
+        }
+    }
+
+    public void realizarCompra(){ //TODO: PEDIR USUARIO
+        printHeader("REALIZAR COMPRA");
+
+        ArrayList<Producto> carritoDeCompras = new ArrayList<>();
+
+        int opc = 0, cantidad;
+
+        while(opc<5 && opc>0){
+            System.out.println("CARRITO DE COMPRAS: Agregue todos los productos que comprará");
+            System.out.println("Seleccione un tipo producto:");
+            System.out.println("1. Limpieza");
+            System.out.println("2. Alimento");
+            System.out.println("3. Electrodoméstico");
+            System.out.println("4. Maquillaje");
+            System.out.println("5. Proceder a la compra");
+            System.out.println("6. Volver al menú principal");
+
+            switch (opc) {
+                case 1:
+                    Limpieza prodLimp = buscarProductoLimpieza(false);
+                    System.out.println("Ingrese la cantidad a comprar");
+                    System.out.print(">> ");
+                    cantidad = sc.nextInt();
+                    sc.nextLine();
+                    for (int i = 0; i < cantidad; i++) {
+                        carritoDeCompras.add(prodLimp);
+                    }
+                    System.out.println(cantidad + " ejemplares de " + prodLimp.getNombre() + " han sido agregados al carrito de compras");
+                    returnToMainMenu();
+                    break;
+            
+                case 2:
+                    Alimento prodAlim = buscarProductoAlimento(false);
+                    System.out.println("Ingrese la cantidad a comprar");
+                    System.out.print(">> ");
+                    cantidad = sc.nextInt();
+                    sc.nextLine();
+                    for (int i = 0; i < cantidad; i++) {
+                        carritoDeCompras.add(prodAlim);
+                    }
+                    System.out.println(cantidad + " ejemplares de " + prodAlim.getNombre() + " han sido agregados al carrito de compras");
+                    returnToMainMenu();
+                    break;
+            
+                case 3:
+                    Electrodomestico prodElect = buscarProductoElectrodomestico(false);
+                    System.out.println("Ingrese la cantidad a comprar");
+                    System.out.print(">> ");
+                    cantidad = sc.nextInt();
+                    sc.nextLine();
+                    for (int i = 0; i < cantidad; i++) {
+                        carritoDeCompras.add(prodElect);
+                    }
+                    System.out.println(cantidad + " ejemplares de " + prodElect.getNombre() + " han sido agregados al carrito de compras");
+                    returnToMainMenu();
+                    break;
+            
+                case 4:
+                    Maquillaje prodMaq = buscarProductoMaquillaje(false);
+                    System.out.println("Ingrese la cantidad a comprar");
+                    System.out.print(">> ");
+                    cantidad = sc.nextInt();
+                    sc.nextLine();
+                    for (int i = 0; i < cantidad; i++) {
+                        carritoDeCompras.add(prodMaq);
+                    }
+                    System.out.println(cantidad + " ejemplares de " + prodMaq.getNombre() + " han sido agregados al carrito de compras");
+                    returnToMainMenu();
+                    break;
+            
+                case 5: //procede a la compra
+                    double total = 0;
+                    if(carritoDeCompras==null){
+                        System.out.println("No se ha agregado ningún producto al carrito de compras");
+                    }else{
+                        for (int j = 0; j < carritoDeCompras.size(); j++) {
+                            total += carritoDeCompras.get(j).getPrecio();
+                        }
+                        System.out.println(String.format("Total a pagar: $%.2f", total));
+                        System.out.print("Presione enter para confirmar la compra...");
+                        sc.nextLine();
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
     // MÉTODOS PRIVADOS
 
     private void printHeader(String header){
@@ -202,7 +317,7 @@ public class Tienda {
     }
 
     private void returnToMainMenu(){
-        System.out.print("Presione enter para volver al menú principal...");
+        System.out.print("Presione enter para volver al menú anterior...");
         sc.nextLine();
     }
 
@@ -240,7 +355,7 @@ public class Tienda {
     }
 
     private int seleccionDeProducto(){
-        System.out.println("Seleccione el tipo producto:");
+        System.out.println("Seleccione un tipo producto:");
         System.out.println("1. Limpieza");
         System.out.println("2. Alimento");
         System.out.println("3. Electrodoméstico");
@@ -554,9 +669,93 @@ public class Tienda {
                 break;
             }
         }
-        returnToMainMenu();
         productosMaquillaje.add(producto);
+        returnToMainMenu();
     }
+
+    private void quitarStockLimpieza(){
+        Limpieza producto = buscarProductoLimpieza(true);
+        System.out.println("STOCK DE " + producto.getNombre() + ": " + producto.getStock());
+        while (true) {
+            System.out.println("Ingrese la cantidad de stock a quitar");
+            System.out.print(">> ");
+            int stock = sc.nextInt();
+            sc.nextLine();
+            boolean agregarStock = producto.quitarStock(stock);
+            if(!agregarStock){
+                System.out.println("El stock ingresado no es válido. Ingrese una cantidad válida");
+            }else{
+                System.out.println("¡" + stock + " unidades de " + producto.getNombre() + " han sido agregadas exitosamente!");
+                break;
+            }
+        }
+
+        productosLimpieza.add(producto);
+        returnToMainMenu();
+    }
+    
+    private void quitarStockAlimento(){
+        Alimento producto = buscarProductoAlimento(true);
+        System.out.println("STOCK DE " + producto.getNombre() + ": " + producto.getStock());
+        while (true) {
+            System.out.println("Ingrese la cantidad de stock a quitar");
+            System.out.print(">> ");
+            int stock = sc.nextInt();
+            sc.nextLine();
+            boolean agregarStock = producto.quitarStock(stock);
+            if(!agregarStock){
+                System.out.println("El stock ingresado no es válido. Ingrese una cantidad válida");
+            }else{
+                System.out.println("¡" + stock + " unidades de " + producto.getNombre() + " han sido agregadas exitosamente!");
+                break;
+            }
+        }
+
+        productosAlimento.add(producto);
+        returnToMainMenu();
+    }
+
+    private void quitarStockElectrodomestico(){
+        Electrodomestico producto = buscarProductoElectrodomestico(false);
+        System.out.println("STOCK DE " + producto.getNombre() + ": " + producto.getStock());
+        while (true) {
+            System.out.println("Ingrese la cantidad de stock a quitar");
+            System.out.print(">> ");
+            int stock = sc.nextInt();
+            sc.nextLine();
+            boolean agregarStock = producto.quitarStock(stock);
+            if(!agregarStock){
+                System.out.println("El stock ingresado no es válido. Ingrese una cantidad válida");
+            }else{
+                System.out.println("¡" + stock + " unidades de " + producto.getNombre() + " han sido agregadas exitosamente!");
+                break;
+            }
+        }
+
+        productosElectrodomesticos.add(producto);
+        returnToMainMenu();
+    }
+
+    private void quitarStockMaquillaje(){
+        Maquillaje producto = buscarProductoMaquillaje(false);
+        System.out.println("STOCK DE " + producto.getNombre() + ": " + producto.getStock());
+        while (true) {
+            System.out.println("Ingrese la cantidad de stock a quitar");
+            System.out.print(">> ");
+            int stock = sc.nextInt();
+            sc.nextLine();
+            boolean agregarStock = producto.quitarStock(stock);
+            if(!agregarStock){
+                System.out.println("El stock ingresado no es válido. Ingrese una cantidad válida");
+            }else{
+                System.out.println("¡" + stock + " unidades de " + producto.getNombre() + " han sido agregadas exitosamente!");
+                break;
+            }
+        }
+        productosMaquillaje.add(producto);
+        returnToMainMenu();
+    }
+
 
     // Eliminación de PRODUCTOS
 

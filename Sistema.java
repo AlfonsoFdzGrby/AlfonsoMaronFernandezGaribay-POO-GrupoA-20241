@@ -24,7 +24,7 @@ public class Sistema {
     }
 
     private void ejecutarSistema(){
-        int opc = 0, subopc = 0;
+        int opc = 0;
 
         while(opc<11){
             printHeader("SISTEMA");
@@ -74,7 +74,7 @@ public class Sistema {
                     break;
             
                 case 8:
-                    //tienda.quitarStock();
+                    tienda.quitarStock();
                     break;
             
                 case 9:
