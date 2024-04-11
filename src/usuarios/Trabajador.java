@@ -8,8 +8,8 @@ public class Trabajador extends Usuario {
     private LocalDate fechaDeContratacion;
     private double salary;
 
-    public Trabajador(String nombre, String apellido, long rfc, double salary) {
-        super(nombre, apellido, Rol.TRABAJADOR);
+    public Trabajador(String nombre, String apellido, long rfc, double salary, String contraseña, String nombreUsuario) {
+        super(nombre, apellido, Rol.CLIENTE, contraseña, nombreUsuario);
         this.rfc = rfc;
         this.salary = salary;
         this.fechaDeContratacion = LocalDate.now();

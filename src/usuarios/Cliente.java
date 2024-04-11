@@ -6,8 +6,8 @@ import src.usuarios.utils.Rol;
 public class Cliente extends Usuario {
     private LocalDate fechaDeRegistro;
 
-    public Cliente(String nombre, String apellido) {
-        super(nombre, apellido, Rol.CLIENTE);
+    public Cliente(String nombre, String apellido, String contraseña, String nombreUsuario) {
+        super(nombre, apellido, Rol.CLIENTE, contraseña, nombreUsuario);
         this.fechaDeRegistro = LocalDate.now();
     }
 

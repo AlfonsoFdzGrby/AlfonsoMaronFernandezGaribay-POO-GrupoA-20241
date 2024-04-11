@@ -9,8 +9,8 @@ public class Gerente extends Usuario {
     private long rfc;
     private LocalDate fechaDeAsenso;
 
-    public Gerente(String nombre, String apellido, String jerarquia, double salary, long rfc) {
-        super(nombre, apellido, Rol.GERENTE);
+    public Gerente(String nombre, String apellido, String jerarquia, double salary, long rfc, String contraseña, String nombreUsuario) {
+        super(nombre, apellido, Rol.CLIENTE, contraseña, nombreUsuario);
         this.jerarquia = jerarquia;
         this.salary = salary;
         this.rfc = rfc;
