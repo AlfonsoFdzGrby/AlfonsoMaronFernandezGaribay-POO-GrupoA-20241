@@ -27,7 +27,7 @@ public class Producto {
 
     protected boolean agregarStock(int stock){
         boolean agregado = false;
-        if(stock<0){
+        if(stock>0){
             this.stock+=stock;
             agregado = true;
         }
@@ -36,7 +36,7 @@ public class Producto {
 
     protected boolean quitarStock(int stock){
         boolean quitado = false;
-        if(stock<0 || stock>this.stock){
+        if(!(stock<0 || stock>this.stock)){
             this.stock-=stock;
             quitado = true;
         }
@@ -51,14 +51,4 @@ public class Producto {
         return precio;
     }
 
-    /* 
-     * Atributos
-     * 
-     * Nombre
-     * N de serie
-     * precio
-     * fecha de importación
-     * 
-     * Heredar a limpieza, alimento, maquillaje y electrodoméstico
-     */
 }

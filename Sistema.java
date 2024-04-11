@@ -13,7 +13,7 @@ public class Sistema {
             String intento = sc.nextLine();
             if(intento.equals(contraseña)){
                 System.out.println("¡Contraseña correcta!");
-                System.out.println("Presione enter para continuar...");
+                System.out.print("Presione enter para continuar...");
                 sc.nextLine();
                 ejecutarSistema();
                 break;
@@ -24,6 +24,8 @@ public class Sistema {
     }
 
     private void ejecutarSistema(){
+        tienda.addCliente(new Cliente("Jorge", "CURP" , "25/03/03" , 123456789));
+        tienda.addLimp(new Limpieza("Lysol", 1534, 15.32, "25/03/23", 15, "Lysol"));
         int opc = 0;
 
         while(opc<11){
@@ -78,11 +80,11 @@ public class Sistema {
                     break;
             
                 case 9:
-                    //tienda.realizarCompra();
+                    tienda.realizarCompra();
                     break;
             
                 case 10:
-                    //tienda.verCompras();
+                    tienda.verCompras();
                     break;
             
                 default:

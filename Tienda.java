@@ -8,9 +8,18 @@ public class Tienda {
     private ArrayList<Alimento> productosAlimento = new ArrayList<>();
     private ArrayList<Empleado> empleados = new ArrayList<>();
     private ArrayList<Cliente> clientes = new ArrayList<>();
+    private ArrayList<Compra> compras = new ArrayList<>();
 
 
     // MÉTODOS PÚBLICOS
+
+    public void addLimp(Limpieza limp){
+        productosLimpieza.add(limp);
+    }
+
+    public void addCliente(Cliente cliente){
+        clientes.add(cliente);
+    }
 
     public void registrarProducto(){
         printHeader("REGISTRAR PRODUCTO");
@@ -110,34 +119,63 @@ public class Tienda {
     public void mostrarProductos(){
         printHeader("MOSTRAR PRODUCTOS");
 
-        System.out.println(" * Productos de Limpieza:");
-        System.out.println("ID:\tDescripción:");
-        for (int i = 0; i < productosLimpieza.size(); i++) {
-            System.out.println(productosLimpieza.get(i).getID() + "\t" + productosLimpieza.get(i).getNombre());
+        if(!productosLimpieza.isEmpty()){
+            System.out.println(" * Productos de Limpieza:");
+            System.out.println("ID:\tDescripción:\tPrecio:\t\tStock:");
+            System.out.println("----------------------------------------------------------");
+            for (int i = 0; i < productosLimpieza.size(); i++) {
+                Limpieza limp = productosLimpieza.get(i);
+                System.out.println(limp.getID() + "\t" + limp.getNombre() + "\t\t$" + limp.getPrecio() + "\t\t" + limp.getStock());
+            }
+        }else{
+            System.out.println(" * No existen productos de limpieza aún");
         }
+        
         System.out.println();
 
-        System.out.println(" * Alimentos:");
-        System.out.println("ID:\tDescripción:");
-        for (int i = 0; i < productosAlimento.size(); i++) {
-            System.out.println(productosAlimento.get(i).getID() + "\t" + productosAlimento.get(i).getNombre());
+        if(!productosAlimento.isEmpty()){
+            System.out.println(" * Alimentos:");
+            System.out.println("ID:\tDescripción:\tPrecio:\t\tStock:");
+            System.out.println("----------------------------------------------------------");
+            for (int i = 0; i < productosAlimento.size(); i++) {
+                Alimento alim = productosAlimento.get(i);
+                System.out.println(alim.getID() + "\t" + alim.getNombre() + "\t\t$" + alim.getPrecio() + "\t\t" + alim.getStock());
+            }
+        }else{
+            System.out.println(" * No existen productos alimenticios aún");
         }
+        
+        System.out.println();
+
+        if(!productosElectrodomesticos.isEmpty()){
+            System.out.println(" * Electrodomesticos:");
+            System.out.println("ID:\tDescripción:\tPrecio:\t\tStock:");
+            System.out.println("----------------------------------------------------------");
+            for (int i = 0; i < productosElectrodomesticos.size(); i++) {
+                Electrodomestico electr = productosElectrodomesticos.get(i);
+                System.out.println(electr.getID() + "\t" + electr.getNombre() + "\t\t$" + electr.getPrecio() + "\t\t" + electr.getStock());
+            }
+        }else{
+            System.out.println(" * No existen productos electrodomésticos aún");
+        }
+        
+        System.out.println();
+
+        if(!productosMaquillaje.isEmpty()){
+            System.out.println(" * Productos de Maquillaje:");
+            System.out.println("ID:\tDescripción:\tPrecio:\t\tStock:");
+            System.out.println("----------------------------------------------------------");
+            for (int i = 0; i < productosMaquillaje.size(); i++) {
+                Maquillaje maq = productosMaquillaje.get(i);
+                System.out.println(maq.getID() + "\t" + maq.getNombre() + "\t\t$" + maq.getPrecio() + "\t\t" + maq.getStock());
+            }
+            System.out.println();
+        }else{
+            System.out.println(" * No existen productos de maquillaje aún");
+        }
+
         System.out.println();
         
-        System.out.println(" * Electrodomesticos:");
-        System.out.println("ID:\tDescripción:");
-        for (int i = 0; i < productosElectrodomesticos.size(); i++) {
-            System.out.println(productosElectrodomesticos.get(i).getID() + "\t" + productosElectrodomesticos.get(i).getNombre());
-        }
-        System.out.println();
-
-        System.out.println(" * Productos de Maquillaje:");
-        System.out.println("ID:\tDescripción:");
-        for (int i = 0; i < productosMaquillaje.size(); i++) {
-            System.out.println(productosMaquillaje.get(i).getID() + "\t" + productosMaquillaje.get(i).getNombre());
-        }
-        System.out.println();
-
         returnToMainMenu();
     }
 
@@ -152,7 +190,7 @@ public class Tienda {
     public void eliminarCliente(){
         printHeader("ELIMINAR CLIENTE");
 
-        Cliente cliente = buscarCliente();
+        Cliente cliente = buscarCliente(false);
 
         System.out.println("¿Está seguro de que quiere eliminar a este cliente? (s/n)");
         System.out.print(">> ");
@@ -218,14 +256,18 @@ public class Tienda {
         }
     }
 
-    public void realizarCompra(){ //TODO: PEDIR USUARIO
+    public void realizarCompra(){
         printHeader("REALIZAR COMPRA");
 
         ArrayList<Producto> carritoDeCompras = new ArrayList<>();
 
+        Cliente cliente = buscarCliente(true);
+
         int opc = 0, cantidad;
 
-        while(opc<5 && opc>0){
+        while(opc<5 && opc>=0){
+            int i = 0;
+            System.out.println("Usuario: " + cliente.getNombre());
             System.out.println("CARRITO DE COMPRAS: Agregue todos los productos que comprará");
             System.out.println("Seleccione un tipo producto:");
             System.out.println("1. Limpieza");
@@ -233,64 +275,99 @@ public class Tienda {
             System.out.println("3. Electrodoméstico");
             System.out.println("4. Maquillaje");
             System.out.println("5. Proceder a la compra");
-            System.out.println("6. Volver al menú principal");
+            System.out.print(">> ");
+            opc = sc.nextInt();
+            sc.nextLine();
 
             switch (opc) {
                 case 1:
                     Limpieza prodLimp = buscarProductoLimpieza(false);
-                    System.out.println("Ingrese la cantidad a comprar");
-                    System.out.print(">> ");
-                    cantidad = sc.nextInt();
-                    sc.nextLine();
-                    for (int i = 0; i < cantidad; i++) {
+                    if(prodLimp.getStock()==0){
+                        System.out.println("Este producto está agotado");
+                        returnToMainMenu();
+                        break;
+                    }
+
+                    while(true){
+                        System.out.println("Ingrese la cantidad a comprar");
+                        System.out.print(">> ");
+                        cantidad = sc.nextInt();
+                        sc.nextLine();
+                        if(!prodLimp.quitarStock(cantidad)){
+                            System.out.println("La cantidad ingresada no es válida");
+                        }else{
+                            break;
+                        }
+                    }
+
+                    for (i = 0; i < cantidad; i++) {
                         carritoDeCompras.add(prodLimp);
                     }
+                    
                     System.out.println(cantidad + " ejemplares de " + prodLimp.getNombre() + " han sido agregados al carrito de compras");
                     returnToMainMenu();
                     break;
             
                 case 2:
                     Alimento prodAlim = buscarProductoAlimento(false);
+                    if(prodAlim.getStock()==0){
+                        System.out.println("Este producto está agotado");
+                        returnToMainMenu();
+                        break;
+                    }
                     System.out.println("Ingrese la cantidad a comprar");
                     System.out.print(">> ");
                     cantidad = sc.nextInt();
                     sc.nextLine();
-                    for (int i = 0; i < cantidad; i++) {
+                    for (i = 0; i < cantidad; i++) {
                         carritoDeCompras.add(prodAlim);
                     }
+                    prodAlim.quitarStock(i+1);
                     System.out.println(cantidad + " ejemplares de " + prodAlim.getNombre() + " han sido agregados al carrito de compras");
                     returnToMainMenu();
                     break;
             
                 case 3:
                     Electrodomestico prodElect = buscarProductoElectrodomestico(false);
+                    if(prodElect.getStock()==0){
+                        System.out.println("Este producto está agotado");
+                        returnToMainMenu();
+                        break;
+                    }
                     System.out.println("Ingrese la cantidad a comprar");
                     System.out.print(">> ");
                     cantidad = sc.nextInt();
                     sc.nextLine();
-                    for (int i = 0; i < cantidad; i++) {
+                    for (i = 0; i < cantidad; i++) {
                         carritoDeCompras.add(prodElect);
                     }
+                    prodElect.quitarStock(i+1);
                     System.out.println(cantidad + " ejemplares de " + prodElect.getNombre() + " han sido agregados al carrito de compras");
                     returnToMainMenu();
                     break;
             
                 case 4:
                     Maquillaje prodMaq = buscarProductoMaquillaje(false);
+                    if(prodMaq.getStock()==0){
+                        System.out.println("Este producto está agotado");
+                        returnToMainMenu();
+                        break;
+                    }
                     System.out.println("Ingrese la cantidad a comprar");
                     System.out.print(">> ");
                     cantidad = sc.nextInt();
                     sc.nextLine();
-                    for (int i = 0; i < cantidad; i++) {
+                    for (i = 0; i < cantidad; i++) {
                         carritoDeCompras.add(prodMaq);
                     }
+                    prodMaq.quitarStock(i+1);
                     System.out.println(cantidad + " ejemplares de " + prodMaq.getNombre() + " han sido agregados al carrito de compras");
                     returnToMainMenu();
                     break;
             
-                case 5: //procede a la compra
+                default: //procede a la compra
                     double total = 0;
-                    if(carritoDeCompras==null){
+                    if(carritoDeCompras.isEmpty()){
                         System.out.println("No se ha agregado ningún producto al carrito de compras");
                     }else{
                         for (int j = 0; j < carritoDeCompras.size(); j++) {
@@ -299,13 +376,53 @@ public class Tienda {
                         System.out.println(String.format("Total a pagar: $%.2f", total));
                         System.out.print("Presione enter para confirmar la compra...");
                         sc.nextLine();
+                        Compra compra = new Compra(carritoDeCompras, total, cliente);
+                        cliente.AgregarCompra(compra);
+                        compras.add(compra);
+                        System.out.println("¡La compra ha sido realizada exitosamente!");
                     }
-                    break;
-                default:
+                    clientes.add(cliente);
+                    returnToMainMenu();
                     break;
             }
         }
+    }
 
+    public void verCompras(){
+        printHeader("VER COMPRAS");
+        System.out.println("Por favor ingrese una opción");
+        System.out.println("1. Ver compras de un cliente");
+        System.out.println("2. Ver compras totales en la tienda");
+        System.out.println("3. Volver al menú principal");
+        System.out.print(">> ");
+        int opc = sc.nextInt();
+        sc.nextLine();
+
+        switch (opc) {
+            case 1:
+                printHeader("COMPRAS DE CLIENTE");
+                Cliente cliente = buscarCliente(false);
+                System.out.println("COMPRAS EFECTUADAS POR EL CLIENTE:");
+                cliente.imprimirListaDeCompras();
+                returnToMainMenu();
+                break;
+        
+            case 2:
+                printHeader("COMPRAS TOTALES EN LA TIENDA");
+                double total = 0;
+                for (int i = 0; i < compras.size(); i++) {
+                    Compra compra = compras.get(i);
+                    System.out.print(" * ");
+                    compra.imprimirInfoCompra();
+                    total+=compra.getTotal();
+                }
+                System.out.printf("TOTAL DE TODAS LAS COMPRAS: $%.2f\n", total);
+                returnToMainMenu();
+                break;
+        
+            default:
+                break;
+        }
     }
 
     // MÉTODOS PRIVADOS
@@ -350,6 +467,7 @@ public class Tienda {
         System.out.print(">> ");
         datos[1] = sc.nextLine();
         System.out.println("Ingrese su fecha de nacimiento (dd/mm/aa)");
+        System.out.print(">> ");
         datos[2] = sc.nextLine();
         return datos;
     }
@@ -491,7 +609,7 @@ public class Tienda {
         return producto;
     }
 
-    private Cliente buscarCliente(){
+    private Cliente buscarCliente(boolean modificar){
         Cliente cliente = null;
         String nombre;
         while (true) {
@@ -502,6 +620,9 @@ public class Tienda {
                 if(nombre.equalsIgnoreCase(clientes.get(i).getNombre())){
                     cliente = clientes.get(i);
                     System.out.println("¡El cliente ha sido encontrado!");
+                    if(modificar){
+                        clientes.remove(i);
+                    }
                     break;
                 }
             }
@@ -685,7 +806,7 @@ public class Tienda {
             if(!agregarStock){
                 System.out.println("El stock ingresado no es válido. Ingrese una cantidad válida");
             }else{
-                System.out.println("¡" + stock + " unidades de " + producto.getNombre() + " han sido agregadas exitosamente!");
+                System.out.println("¡" + stock + " unidades de " + producto.getNombre() + " han sido quitadas exitosamente!");
                 break;
             }
         }
