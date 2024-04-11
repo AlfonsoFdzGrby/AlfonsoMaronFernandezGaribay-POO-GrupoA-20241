@@ -33,6 +33,7 @@ public class Menu {
         System.out.println("1. Cliente");
         System.out.println("2. Trabajador");
         System.out.println("3. Gerente");
+        System.out.print(">> ");
         int opc = sc.nextInt();
         sc.nextLine();
 
@@ -60,7 +61,7 @@ public class Menu {
     private static void iniciarSesion(){
         printHeader("INICIAR SESION");
         Usuario usuario = null;
-
+        int intentos = 3;
         while(true){
             System.out.println("Ingrese su nombre de usuario");
             System.out.print(">> ");
@@ -83,6 +84,7 @@ public class Menu {
         
         while(true){
             System.out.println("Ingrese la contraseña");
+            System.out.println("Tiene " + intentos + " intentos restantes");
             System.out.print(">> ");
             String contraseña = sc.nextLine();
             if(contraseña.equals(usuario.getContraseña())){
@@ -92,6 +94,12 @@ public class Menu {
                 break;
             }else{
                 System.out.println("La contraseña no es correcta");
+                intentos--;
+                if(intentos==0){
+                    System.out.println("Sus intentos se han agotado.");
+                    continuar();
+                    break;
+                }
             }
         }
     }
@@ -127,7 +135,7 @@ public class Menu {
 
     private static void menuGerente(){
         printHeader("GERENTE");
-        System.out.println("Seleccione una opción");
+        System.out.println("Seleccione una opción"); //+ Puede modificar empleados también
         System.out.println("1. Crear");
         System.out.println("2. Mostrar"); //+ mostrar registro de rentas
         System.out.println("3. Actualizar");
@@ -146,6 +154,7 @@ public class Menu {
             System.out.println("1. Crear cuenta");
             System.out.println("2. Iniciar Sesión");
             System.out.println("3. Salir del programa");
+            System.out.print(">> ");
             opc = sc.nextInt();
             sc.nextLine();
 
