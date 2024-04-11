@@ -126,7 +126,7 @@ public class Menu {
     }
 
     private static void menuGerente(){
-        printHeader("TRABAJADOR");
+        printHeader("GERENTE");
         System.out.println("Seleccione una opción");
         System.out.println("1. Crear");
         System.out.println("2. Mostrar"); //+ mostrar registro de rentas
