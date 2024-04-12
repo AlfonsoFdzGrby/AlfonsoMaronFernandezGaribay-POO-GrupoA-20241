@@ -1,9 +1,11 @@
 package src.sistema;
 import java.util.Scanner;
 import src.usuarios.utils.*;
-import src.usuarios.Usuario;
+import src.usuarios.*;
 
 //CRUD: Create, Read, Update, Delete
+//10-04-24: 
+//11-04-24: Cambiar la opción de salir a cerrar sesión
 
 public class Menu {
     private static Biblioteca bibiloteca = new Biblioteca();
@@ -53,7 +55,12 @@ public class Menu {
         System.out.print(">> ");
         String contraseña = sc.nextLine();
 
-        bibiloteca.agregarUsuario(new Usuario(nombre, apellido, rol, contraseña, nombreUsuario));
+        switch (rol) {
+            case Rol.CLIENTE -> bibiloteca.agregarUsuario(new Cliente(nombre, apellido, contraseña, nombreUsuario));
+            case Rol.TRABAJADOR -> bibiloteca.agregarUsuario(new Trabajador(nombre, apellido, opc, opc, contraseña, nombreUsuario));
+            case Rol.GERENTE -> bibiloteca.agregarUsuario(new Gerente(nombre, apellido, apellido, opc, opc, contraseña, nombreUsuario));
+        }
+
         System.out.println("¡La cuenta ha sido registrado correctamente!");
         continuar();
     }
@@ -62,93 +69,180 @@ public class Menu {
         printHeader("INICIAR SESION");
         Usuario usuario = null;
         int intentos = 3;
-        while(true){
-            System.out.println("Ingrese su nombre de usuario");
-            System.out.print(">> ");
-            String nombreUsuario = sc.nextLine();
 
-            for (int i = 0; i < bibiloteca.getUsuarios().size(); i++) {
-                if(nombreUsuario.equals(bibiloteca.getUsuarios().get(i).getNombreUsuario())){
-                    usuario = bibiloteca.getUsuarios().get(i);
+        if(bibiloteca.getUsuarios().isEmpty()){
+            System.out.println("No hay usuarios registrados aún");
+            System.out.println("Por favor registre al menos un usuario antes de iniciar sesión...");
+            continuar();
+        }else{
+            while(true){
+                System.out.println("Ingrese su nombre de usuario");
+                System.out.print(">> ");
+                String nombreUsuario = sc.nextLine();
+    
+                for (int i = 0; i < bibiloteca.getUsuarios().size(); i++) {
+                    if(nombreUsuario.equals(bibiloteca.getUsuarios().get(i).getNombreUsuario())){
+                        usuario = bibiloteca.getUsuarios().get(i);
+                        break;
+                    }
+                }
+    
+                if(usuario!=null){
+                    System.out.println("¡Usuario encontrado!");
                     break;
+                }else{
+                    System.out.println("Usuario no encontrado");
                 }
             }
-
-            if(usuario!=null){
-                System.out.println("¡Usuario encontrado!");
-                break;
-            }else{
-                System.out.println("Usuario no encontrado");
-            }
-        }
-        
-        while(true){
-            System.out.println("Ingrese la contraseña");
-            System.out.println("Tiene " + intentos + " intentos restantes");
-            System.out.print(">> ");
-            String contraseña = sc.nextLine();
-            if(contraseña.equals(usuario.getContraseña())){
-                System.out.println("¡La contraseña es correcta!");
-                continuar();
-                menuUsuarios(usuario);
-                break;
-            }else{
-                System.out.println("La contraseña no es correcta");
-                intentos--;
-                if(intentos==0){
-                    System.out.println("Sus intentos se han agotado.");
+            
+            while(true){
+                System.out.println("Ingrese la contraseña");
+                System.out.println("Tiene " + intentos + " intentos restantes");
+                System.out.print(">> ");
+                String contraseña = sc.nextLine();
+                if(contraseña.equals(usuario.getContraseña())){
+                    System.out.println("¡La contraseña es correcta!");
                     continuar();
+                    menuUsuarios(usuario);
                     break;
+                }else{
+                    System.out.println("La contraseña no es correcta");
+                    intentos--;
+                    if(intentos==0){
+                        System.out.println("Sus intentos se han agotado.");
+                        continuar();
+                        break;
+                    }
                 }
             }
         }
     }
 
     private static void menuUsuarios(Usuario usuario){
-        switch (usuario.getRol()) {
-            case CLIENTE -> menuCliente();
-            case TRABAJADOR -> menuTrabajador();
-            default -> menuGerente();
+
+        Cliente cliente = null;
+        Trabajador trabajador = null;
+        Gerente gerente = null;
+
+        if(usuario instanceof Cliente){ //wtf que es esto de instanceof JAJAJAJA
+            cliente = (Cliente)usuario;
+            menuCliente(cliente);
+        }else if(usuario instanceof Trabajador){
+            trabajador = (Trabajador)usuario;
+            menuTrabajador(trabajador);
+        }else{
+            gerente = (Gerente)usuario;
+            menuGerente(gerente);
         }
+
     }
 
-    private static void menuCliente(){
+    private static void menuCliente(Cliente cliente){
+        //Meter menú a un while(true)
         printHeader("CLIENTE");
         System.out.println("Seleccione una opción");
         System.out.println("1. Ver rentas");
         System.out.println("2. Ver info");
         System.out.println("3. Ver libros disponibles");
+        System.out.println("4. Cerrar Sesión"); // Regresar al menú principal
         System.out.print(">> ");
+        int opc = sc.nextInt();
+        sc.nextLine();
         //TODO: Menú cliente
+        switch (opc) {
+            case 1: 
+                //clienteVerRentas();
+                break;
+            
+            case 2:
+                //clienteVerInfo();
+                break;
+            
+            case 3:
+                //clienteVerLibrosDisponibles();
+                break;
+            
+            default:
+                break;
+        }
     }
 
-    private static void menuTrabajador(){
+    private static void menuTrabajador(Trabajador trabajador){
         printHeader("TRABAJADOR");
         System.out.println("Seleccione una opción");
         System.out.println("1. Crear");
         System.out.println("2. Mostrar");
         System.out.println("3. Actualizar");
         System.out.println("4. Eliminar");
+        System.out.println("5. Cerrar Sesión");
         System.out.print(">> ");
+        int opc = sc.nextInt();
+        sc.nextLine();
         //TODO: Menú Trabajador
+
+        switch (opc) {
+            case 1:
+                //trabajadorCrear();
+                break;
+        
+            case 2:
+                //trabajadorMostrar();
+                break;
+        
+            case 3:
+                //trabajadorActualizar();
+                break;
+        
+            case 4:
+                //trabajadorEliminar();
+                break;
+        
+            default:
+                break;
+        }
     }
 
-    private static void menuGerente(){
+    private static void menuGerente(Gerente gerente){
         printHeader("GERENTE");
         System.out.println("Seleccione una opción"); //+ Puede modificar empleados también
         System.out.println("1. Crear");
         System.out.println("2. Mostrar"); //+ mostrar registro de rentas
         System.out.println("3. Actualizar");
         System.out.println("4. Eliminar");
+        System.out.println("5. Cerrar Sesión");
         System.out.print(">> ");
         //TODO: Menú Gerente
+        int opc = sc.nextInt();
+        sc.nextLine();
+
+        switch (opc) {
+            case 1:
+                //gerenteCrear();
+                break;
+        
+            case 2:
+                //gerenteMostrar();
+                break;
+        
+            case 3:
+                //gerenteActualizar();
+                break;
+        
+            case 4:
+                //gerenteEliminar();
+                break;
+        
+            default:
+                break;
+        }
     }
 
     // MÉTODO PÚBLICO
 
-    public void ejecutarMenu(){
+    public static void ejecutarMenu(){
         int opc = 1;
-        while((opc>0 && opc<3)){
+        while(opc>0 && opc<3){
+
             printHeader("BIBLIOTECA");
             System.out.println("Elija una opción:");
             System.out.println("1. Crear cuenta");
