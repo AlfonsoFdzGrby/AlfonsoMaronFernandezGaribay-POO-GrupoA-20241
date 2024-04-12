@@ -665,7 +665,7 @@ public class Tienda {
         String fechaImp = datos[3];
         int stock = Integer.parseInt(datos[4]);
 
-        System.out.println("Ingrese la fecha de caducidad del producto");
+        System.out.println("Ingrese la fecha de caducidad del producto (dd/mm/aa)");
         System.out.print(">> ");
         String fechaCad = sc.nextLine();
 
