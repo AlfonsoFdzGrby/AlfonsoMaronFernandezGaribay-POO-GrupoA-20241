@@ -3,10 +3,6 @@ import java.util.Scanner;
 import src.usuarios.utils.*;
 import src.usuarios.*;
 
-//CRUD: Create, Read, Update, Delete
-//10-04-24: 
-//11-04-24: Cambiar la opción de salir a cerrar sesión
-
 public class Menu {
     private static Biblioteca bibiloteca = new Biblioteca();
 
@@ -124,7 +120,7 @@ public class Menu {
         Trabajador trabajador = null;
         Gerente gerente = null;
 
-        if(usuario instanceof Cliente){ //wtf que es esto de instanceof JAJAJAJA
+        if(usuario instanceof Cliente){
             cliente = (Cliente)usuario;
             menuCliente(cliente);
         }else if(usuario instanceof Trabajador){
