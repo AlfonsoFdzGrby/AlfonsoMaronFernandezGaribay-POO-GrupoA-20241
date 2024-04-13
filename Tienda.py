@@ -27,6 +27,97 @@ class Tienda:
         else:
             return
         
+    def mostrarProductos(self):
+        self.printHeader("MOSTRAR PRODUCTOS")
+        if len(self.productos) <= 0:
+            print("No hay productos registrados aún")
+        else:
+            print("ID:\tDescripción:\tPrecio:\tStock:")
+            for i in self.productos:
+                print(f"{i.getID()}\t{i.getNombre()}\t\t{i.getPrecio()}\t{i.getStock()}\t")
+        self.returnToMainMenu()
+        
+    def mostrarClientes(self):
+        self.printHeader("MOSTRAR CLIENTES")
+        if len(self.clientes) <= 0:
+            print("No hay usuarios registrados aún")
+        else:
+            for i in self.clientes:
+                print(f"  * {i.getNombre()}")
+        self.returnToMainMenu()
+        
+    def eliminarProducto(self):
+        self.printHeader("ELIMINAR PRODUCTO")
+        producto = self.buscarProducto(False)
+        opc = input("¿Está seguro de que quiere eliminar este producto? (s/n): ")
+        ans = self.siONo(opc)
+        if ans == True:
+            self.productos.remove(producto)
+            print("El producto ha sido eliminado")
+        else:
+            print("El producto no se eliminó")
+        self.returnToMainMenu()
+    
+    def eliminarCliente(self):
+        self.printHeader("ELIMINAR CLIENTE")
+        cliente = self.buscarCliente(False)
+        opc = input("¿Está seguro de que quiere eliminar este cliente? (s/n): ")
+        ans = self.siONo(opc)
+        if ans == True:
+            self.clientes.remove(cliente)
+            print("El cliente ha sido eliminado")
+        else:
+            print("El cliente no se eliminó")
+        self.returnToMainMenu()
+        
+    def añadirStock(self):
+        self.printHeader("AÑADIR STOCK")
+        producto = self.buscarProducto(True)
+        while True:
+            stock = int(input("Ingrese el stock a añadir: "))
+            if producto.agregarStock(stock) == True:
+                print("La cantidad se ha agregado al producto")
+                break
+            else:
+                print("La cantidad especificada no es válida")
+        self.productos.append(producto)
+        self.returnToMainMenu()
+        
+    def quitarStock(self):
+        self.printHeader("QUITAR STOCK")
+        producto = self.buscarProducto(True)
+        while True:
+            stock = int(input("Ingrese el stock a quitar: "))
+            if producto.quitarStock(stock) == True:
+                print("La cantidad se ha quitado exitosamente")
+                break
+            else:
+                print("La cantidad especificada no es válda")
+        self.productos.append(producto)
+        self.returnToMainMenu()
+        
+    def verCompras(self):
+        self.printHeader("VER COMPRAS")
+        print("Ingrese una opción:")
+        print("1. Ver las compras de la tienda")
+        print("2. Ver las compras de un cliente")
+        print("3. Volver al menú principal")
+        opt = int(input(">> "))
+        
+        if opt == 1:
+            print("Compras de la tienda")
+            for i in self.compras:
+                i.imprimirInfoCompra()
+            self.returnToMainMenu()
+
+        elif opt == 2:
+            cliente = self.buscarCliente(False)
+            cliente.imprimirListaDeCompras()
+            self.returnToMainMenu()
+            
+        else:
+            return
+    
     def buscarCliente(self, modificar):
         cliente = None
         while True:
