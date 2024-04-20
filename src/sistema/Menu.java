@@ -96,8 +96,8 @@ public class Menu {
         while(usuarioEnSesion.getUsuarioActual()!=null){
             printHeader("TRABAJADOR");
             System.out.println("Seleccione una opción");
-            System.out.println("1. Crear"); //Libro, o usuario
-            System.out.println("2. Mostrar"); //Libro, cliente y propia
+            System.out.println("1. Registrar"); //Libro, o usuario
+            System.out.println("2. Consultar"); //Libro, cliente y propia
             System.out.println("3. Actualizar"); //Información propia y de usuarios
             System.out.println("4. Eliminar"); //Clientes y libros
             System.out.println("5. Cerrar Sesión");
@@ -107,11 +107,11 @@ public class Menu {
 
             switch (opc) {
                 case 1:
-                    
+                    biblioteca.registrar(false);
                     break;
             
                 case 2:
-                    
+                    biblioteca.consultar(false);
                     break;
             
                 case 3:
@@ -133,23 +133,22 @@ public class Menu {
         while(usuarioEnSesion.getUsuarioActual()!=null){
             printHeader("GERENTE");
             System.out.println("Seleccione una opción"); //+ Puede modificar empleados también
-            System.out.println("1. Crear");
-            System.out.println("2. Mostrar"); //+ mostrar registro de rentas
+            System.out.println("1. Registrar");
+            System.out.println("2. Consultar"); //+ mostrar registro de rentas
             System.out.println("3. Actualizar");
             System.out.println("4. Eliminar");
-            System.out.println("5. Mostrar a todos los usuarios");
-            System.out.println("6. Cerrar Sesión");
+            System.out.println("5. Cerrar Sesión");
             System.out.print(">> ");
             int opc = sc.nextInt();
             sc.nextLine();
 
             switch (opc) {
                 case 1:
-                    
+                    biblioteca.registrar(true);
                     break;
             
                 case 2:
-                    
+                    biblioteca.consultar(true);
                     break;
             
                 case 3:
@@ -157,10 +156,6 @@ public class Menu {
                     break;
             
                 case 4:
-                    
-                    break;
-            
-                case 5:
                     
                     break;
             

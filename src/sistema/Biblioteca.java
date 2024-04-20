@@ -19,6 +19,11 @@ public class Biblioteca {
         usuarios.put(Rol.CLIENTE, new ArrayList<Usuario>());
         usuarios.put(Rol.TRABAJADOR, new ArrayList<Usuario>());
         usuarios.put(Rol.GERENTE, new ArrayList<Usuario>());
+        agregarUsuario(new Cliente("Cliente", "1", "443566", "12345", "cliente1"), Rol.CLIENTE);
+        agregarUsuario(new Cliente("Cliente", "2", "443562", "12345", "cliente2"), Rol.CLIENTE);
+        agregarUsuario(new Trabajador("Trabajador", "1", "5316456", 1234529, 15000, "12345", "trabajador1"), Rol.TRABAJADOR);
+        agregarUsuario(new Trabajador("Trabajador", "2", "5316488", 1254529, 15000, "12345", "trabajador2"), Rol.TRABAJADOR);
+        agregarUsuario(new Gerente("Gerente", "1", "8798465", "El mero mero", 50000, 828288, "12345", "gerente1"), Rol.GERENTE);
     }
 
     //---------------------------------------- MÉTODOS PÚBLICOS ----------------------------------------
@@ -79,7 +84,79 @@ public class Biblioteca {
 
     //---------------------------------------- MENÚS DE USUARIOS -----------------------------------------
 
+    public void registrar(boolean admin){
+        int opc;
+        if(!admin){
+            printHeader("TRABAJADOR - Registrar");
+            System.out.println("Seleccione un elemento a registrar");
+            System.out.println("1. Libro");
+            System.out.println("2. Cliente");
+            System.out.println("3. Volver al menú anterior");
+            System.out.print(">> ");
+            opc = sc.nextInt();
+            sc.nextLine();
+            switch (opc) {
+                //case 1 -> registrarLibro();
+                case 2 -> registrarCliente();
+            }
+        }else{
+            printHeader("GERENTE - Registrar");
+            System.out.println("Seleccione un elemento a registrar");
+            System.out.println("1. Libro");
+            System.out.println("2. Cliente");
+            System.out.println("3. Trabajador");
+            System.out.println("4. Gerente");
+            System.out.println("5. Volver al menú anterior");
+            System.out.print(">> ");
+            opc = sc.nextInt();
+            sc.nextLine();
+            switch (opc) {
+                //case 1 -> registrarLibro();
+                case 2 -> registrarCliente();
+                case 3 -> registrarTrabajador();
+                case 4 -> registrarGerente();
+            }
+        }
+    }
 
+    public void consultar(boolean admin){
+        int opc;
+        if(!admin){
+            printHeader("TRABAJADOR - Consultar");
+            System.out.println("Seleccione un elemento a consultar");
+            System.out.println("1. Libros");
+            System.out.println("2. Clientes");
+            System.out.println("3. Información propia");
+            System.out.println("4. Volver al menú anterior");
+            System.out.print(">> ");
+            opc = sc.nextInt();
+            sc.nextLine();
+            switch(opc){
+                //case 1 -> consultarLibros();
+                case 2 -> mostrarClientes();
+                case 3 -> usuarioEnSesion.getUsuarioActual().toString();
+            }
+        }else{
+            printHeader("GERENTE - Consultar");
+            System.out.println("Seleccione un elemento a consultar");
+            System.out.println("1. Libros");
+            System.out.println("2. Clientes");
+            System.out.println("3. Trabajadores");
+            System.out.println("4. Gerentes");
+            System.out.println("5. Información propia");
+            System.out.println("6. Volver al menú anterior");
+            System.out.print(">> ");
+            opc = sc.nextInt();
+            sc.nextLine();
+            switch (opc) {
+                //case 1 -> mostrarLibros();
+                case 2 -> mostrarClientes();
+                case 3 -> mostrarTrabajadores();
+                case 4 -> mostrarGerentes();
+                case 5 -> usuarioEnSesion.getUsuarioActual().toString();
+            }
+        }
+    }
 
     //---------------------------------------- OBTENCIÓN DE DATOS ----------------------------------------
 
@@ -168,7 +245,7 @@ public class Biblioteca {
     private ArrayList<String> obtenerDatosComun(Rol rol){
         ArrayList<String> datosComun = new ArrayList<>();
         String rolActual = rol == Rol.CLIENTE ? "Cliente" : rol == Rol.TRABAJADOR ? "Trabajador" : "Gerente";
-        System.out.println(String.format("REGISTRAR %s", rolActual.toUpperCase()));
+        printHeader(String.format("REGISTRAR %s", rolActual.toUpperCase()));
         System.out.println("Ingrese su nombre");
         System.out.print(">> ");
         String nombre = sc.nextLine();
@@ -204,9 +281,9 @@ public class Biblioteca {
         ArrayList<String> datosComun = obtenerDatosComun(Rol.TRABAJADOR);
         String nombre = datosComun.get(0);
         String apellido = datosComun.get(1);
-        String numTelefono = datosComun.get(3);
-        String nombreUsuario = datosComun.get(4);
-        String contraseña = datosComun.get(5);
+        String numTelefono = datosComun.get(2);
+        String nombreUsuario = datosComun.get(3);
+        String contraseña = datosComun.get(4);
         System.out.print(">> ");
         long rfc = sc.nextLong();
         sc.nextLine();
@@ -223,9 +300,9 @@ public class Biblioteca {
         ArrayList<String> datosComun = obtenerDatosComun(Rol.GERENTE);
         String nombre = datosComun.get(0);
         String apellido = datosComun.get(1);
-        String numTelefono = datosComun.get(3);
-        String nombreUsuario = datosComun.get(4);
-        String contraseña = datosComun.get(5);
+        String numTelefono = datosComun.get(2);
+        String nombreUsuario = datosComun.get(3);
+        String contraseña = datosComun.get(4);
         System.out.println("Ingrese su sector");
         System.out.print(">> ");
         String sector = sc.nextLine();
@@ -247,11 +324,27 @@ public class Biblioteca {
     private void mostrarClientes(){
         System.out.println("CLIENTES:");
         for (Usuario usuarioAMostrar : usuarios.get(Rol.CLIENTE)) {
-            System.out.println("   * " + usuarioAMostrar.getNombreUsuario());
+            System.out.println("   * " + usuarioAMostrar.toString());
         }
         continuar();
     }
 
+    private void mostrarTrabajadores(){
+        System.out.println("TRABAJADORES:");
+        for (Usuario usuarioAMostrar : usuarios.get(Rol.TRABAJADOR)) {
+            System.out.println("   * " + usuarioAMostrar.toString());
+        }
+        continuar();
+    }
+
+    private void mostrarGerentes(){
+        System.out.println("GERENTES");
+        for (Usuario usuarioAMostrar : usuarios.get(Rol.GERENTE)) {
+            System.out.println("   * " + usuarioAMostrar.toString());
+        }
+        continuar();
+    }
+    
     //---------------------------------------- DISEÑO E INTERFAZ ----------------------------------------
 
     private void continuar(){
@@ -259,10 +352,10 @@ public class Biblioteca {
         sc.nextLine();
     }
 
-    private void printHeader(String header){
-        System.out.println("=============================================");
+    public static void printHeader(String header){
+        System.out.println("=====================================================");
         System.out.println(header);
-        System.out.println("=============================================");
+        System.out.println("=====================================================");
     }
 
     //---------------------------------------- GETTERS / SETTERS ----------------------------------------
