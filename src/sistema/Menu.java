@@ -1,14 +1,12 @@
 package sistema;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 import usuarios.Cliente;
 import usuarios.Gerente;
 import usuarios.Trabajador;
 import usuarios.Usuario;
-import usuarios.utils.Rol;
+import sistema.utils.*;
 import utils.*;
 
 public class Menu {
@@ -21,7 +19,7 @@ public class Menu {
     public static void ejecutarMenu(){
         int opc = 1;
         while(opc>0 && opc<3){
-            printHeader("BIBLIOTECA");
+            Designer.printHeader("BIBLIOTECA");
             System.out.println("Elija una opción:");
             System.out.println("1. Crear cuenta");
             System.out.println("2. Iniciar Sesión");
@@ -31,16 +29,8 @@ public class Menu {
             sc.nextLine();
 
             switch (opc) {
-                case 1:
-                    biblioteca.crearCuenta();
-                    break;
-            
-                case 2:
-                    biblioteca.iniciarSesion();
-                    break;
-            
-                default:
-                    break;
+                case 1 -> biblioteca.crearCuenta();
+                case 2 -> biblioteca.iniciarSesion();
             }
         }
     }
@@ -59,7 +49,7 @@ public class Menu {
 
     private static void menuCliente(){
         while(usuarioEnSesion.getUsuarioActual()!=null){
-            printHeader("CLIENTE");
+            Designer.printHeader("CLIENTE");
             System.out.println("1. Ver rentas");
             System.out.println("2. Ver info");
             System.out.println("3. Editar información");
@@ -69,36 +59,20 @@ public class Menu {
             int opc = sc.nextInt();
             sc.nextLine();
             switch (opc) {
-                case 1:
-                    
-                    break;
-            
-                case 2:
-                    
-                    break;
-            
-                case 3:
-                    
-                    break;
-            
-                case 4:
-                    
-                    break;
-            
-                default:
-                    usuarioEnSesion.cerrarSesion();
-                    break;
+                case 2 -> usuarioEnSesion.getUsuarioActual().toString();
+                case 3 -> Cliente.modificarCliente((Cliente)usuarioEnSesion.getUsuarioActual());
+                default -> usuarioEnSesion.cerrarSesion();
             }
         }
     }
 
     private static void menuTrabajador(){
         while(usuarioEnSesion.getUsuarioActual()!=null){
-            printHeader("TRABAJADOR");
+            Designer.printHeader("TRABAJADOR");
             System.out.println("Seleccione una opción");
             System.out.println("1. Registrar"); //Libro, o usuario
             System.out.println("2. Consultar"); //Libro, cliente y propia
-            System.out.println("3. Actualizar"); //Información propia y de usuarios
+            System.out.println("3. Modificar"); //Información propia y de usuarios
             System.out.println("4. Eliminar"); //Clientes y libros
             System.out.println("5. Cerrar Sesión");
             System.out.print(">> ");
@@ -106,36 +80,20 @@ public class Menu {
             sc.nextLine();
 
             switch (opc) {
-                case 1:
-                    biblioteca.registrar(false);
-                    break;
-            
-                case 2:
-                    biblioteca.consultar(false);
-                    break;
-            
-                case 3:
-                    
-                    break;
-            
-                case 4:
-                    
-                    break;
-            
-                default:
-                    usuarioEnSesion.cerrarSesion();
-                    break;
+                case 1 -> registrar(false);
+                case 2 -> consultar(false);
+                default -> usuarioEnSesion.cerrarSesion();
             }
         }
     }
 
     private static void menuGerente(){
         while(usuarioEnSesion.getUsuarioActual()!=null){
-            printHeader("GERENTE");
+            Designer.printHeader("GERENTE");
             System.out.println("Seleccione una opción"); //+ Puede modificar empleados también
             System.out.println("1. Registrar");
             System.out.println("2. Consultar"); //+ mostrar registro de rentas
-            System.out.println("3. Actualizar");
+            System.out.println("3. Modificar");
             System.out.println("4. Eliminar");
             System.out.println("5. Cerrar Sesión");
             System.out.print(">> ");
@@ -143,40 +101,85 @@ public class Menu {
             sc.nextLine();
 
             switch (opc) {
-                case 1:
-                    biblioteca.registrar(true);
-                    break;
-            
-                case 2:
-                    biblioteca.consultar(true);
-                    break;
-            
-                case 3:
-                    
-                    break;
-            
-                case 4:
-                    
-                    break;
-            
-                default:
-                    usuarioEnSesion.cerrarSesion();
-                    break;
+                case 1 -> registrar(true);
+                case 2 -> consultar(true);
+                default -> usuarioEnSesion.cerrarSesion();
             }
         }
     }
 
-    //---------------------------------------- DISEÑO E INTERFAZ ----------------------------------------
-
-    public static void printHeader(String header){
-        System.out.println("=====================================================");
-        System.out.println(header);
-        System.out.println("=====================================================");
+    private static void registrar(boolean admin){
+        int opc;
+        if(!admin){
+            Designer.printHeader("TRABAJADOR - Registrar");
+            System.out.println("Seleccione un elemento a registrar");
+            System.out.println("1. Libro");
+            System.out.println("2. Cliente");
+            System.out.println("3. Volver al menú anterior");
+            System.out.print(">> ");
+            opc = sc.nextInt();
+            sc.nextLine();
+            switch (opc) {
+                //case 1 -> registrarLibro();
+                case 2 -> Cliente.registrarCliente();
+            }
+        }else{
+            Designer.printHeader("GERENTE - Registrar");
+            System.out.println("Seleccione un elemento a registrar");
+            System.out.println("1. Libro");
+            System.out.println("2. Cliente");
+            System.out.println("3. Trabajador");
+            System.out.println("4. Gerente");
+            System.out.println("5. Volver al menú anterior");
+            System.out.print(">> ");
+            opc = sc.nextInt();
+            sc.nextLine();
+            switch (opc) {
+                //case 1 -> registrarLibro();
+                case 2 -> Cliente.registrarCliente();
+                case 3 -> Trabajador.registrarTrabajador();
+                case 4 -> Gerente.registrarGerente();
+            }
+        }
     }
 
-    private static void continuar(){
-        System.out.print("Presione enter para continuar...");
-        sc.nextLine();
+    private static void consultar(boolean admin){
+        int opc;
+        if(!admin){
+            Designer.printHeader("TRABAJADOR - Consultar");
+            System.out.println("Seleccione un elemento a consultar");
+            System.out.println("1. Libros");
+            System.out.println("2. Clientes");
+            System.out.println("3. Información propia");
+            System.out.println("4. Volver al menú anterior");
+            System.out.print(">> ");
+            opc = sc.nextInt();
+            sc.nextLine();
+            switch(opc){
+                //case 1 -> consultarLibros();
+                case 2 -> Cliente.mostrarClientes();
+                case 3 -> usuarioEnSesion.getUsuarioActual().toString();
+            }
+        }else{
+            Designer.printHeader("GERENTE - Consultar");
+            System.out.println("Seleccione un elemento a consultar");
+            System.out.println("1. Libros");
+            System.out.println("2. Clientes");
+            System.out.println("3. Trabajadores");
+            System.out.println("4. Gerentes");
+            System.out.println("5. Información propia");
+            System.out.println("6. Volver al menú anterior");
+            System.out.print(">> ");
+            opc = sc.nextInt();
+            sc.nextLine();
+            switch (opc) {
+                //case 1 -> mostrarLibros();
+                case 2 -> Cliente.mostrarClientes();
+                case 3 -> Trabajador.mostrarTrabajadores();
+                case 4 -> Gerente.mostrarGerentes();
+                case 5 -> usuarioEnSesion.getUsuarioActual().toString();
+            }
+        }
     }
 
 }

@@ -1,6 +1,9 @@
 package usuarios;
 
 import java.time.LocalDate;
+import java.util.*;
+
+import sistema.Biblioteca;
 import usuarios.utils.Rol;
 
 public class Usuario {
@@ -13,6 +16,7 @@ public class Usuario {
     private String nombreUsuario;
     private LocalDate fechaDeRegistro;
     private String numeroTelefono;
+    private static Scanner sc = new Scanner(System.in);
 
     public Usuario(String nombre, String apellido, Rol rol, String numeroTelefono, String contraseña, String nombreUsuario) {
         this.nombre = nombre;
@@ -26,6 +30,30 @@ public class Usuario {
         this.fechaDeRegistro = LocalDate.now();
     }
 
+    public static Usuario buscarUsuario(){
+        Usuario usuario = null;
+        while(true){
+            System.out.println("Ingrese su nombre de usuario");
+            System.out.print(">> ");
+            String nombreUsuario = sc.nextLine();
+
+            for (ArrayList<Usuario> usuarios : Biblioteca.usuarios.values()) {
+                for (Usuario usuarioABuscar : usuarios) {
+                    if(usuarioABuscar.getNombreUsuario().equals(nombreUsuario)){
+                        usuario = usuarioABuscar;
+                    }
+                }
+            }
+            if(usuario!=null){
+                System.out.println("¡Usuario encontrado!");
+                break;
+            }else{
+                System.out.println("Usuario no encontrado");
+            }
+        }
+        return usuario;
+    }
+
     @Override
     public String toString(){
         return String.format("ID: %d\nNombre completo: %s %s\nRol: %s\nFecha de registro: %s\n", id, nombre, apellido, rol, fechaDeRegistro.toString());
@@ -33,6 +61,10 @@ public class Usuario {
 
     public String getContraseña(){
         return contraseña;
+    }
+
+    public String getNombreCompleto(){
+        return nombre + " " + apellido;
     }
 
     public String getNombreUsuario() {
@@ -47,8 +79,32 @@ public class Usuario {
         return rol;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public String getNumeroTelefono() {
         return numeroTelefono;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setNumeroTelefono(String numeroTelefono) {
+        this.numeroTelefono = numeroTelefono;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 
 }
