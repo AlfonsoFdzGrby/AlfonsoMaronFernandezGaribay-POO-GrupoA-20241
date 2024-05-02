@@ -4,8 +4,7 @@ import usuarios.utils.Rol;
 import java.time.LocalDate;
 
 import sistema.*;
-import sistema.utils.DatosComun;
-import sistema.utils.Designer;
+import sistema.utils.*;
 
 import java.util.*;
 
@@ -17,8 +16,8 @@ public class Gerente extends Usuario {
 
     private static Scanner sc = new Scanner(System.in);
 
-    public Gerente(String nombre, String apellido, String numeroTelefono, String sector, double salary, long rfc, String contraseña, String nombreUsuario) {
-        super(nombre, apellido, Rol.GERENTE, numeroTelefono, contraseña, nombreUsuario);
+    public Gerente(String nombre, String apellido, String numeroTelefono, String sector, double salary, long rfc, String contraseña, String nombreUsuario, LocalDate fechaDeNacimiento) {
+        super(nombre, apellido, Rol.GERENTE, numeroTelefono, contraseña, nombreUsuario, fechaDeNacimiento);
         this.sector = sector;
         this.salary = salary;
         this.rfc = rfc;
@@ -37,6 +36,14 @@ public class Gerente extends Usuario {
         String numTelefono = datosComun.get(2);
         String nombreUsuario = datosComun.get(3);
         String contraseña = datosComun.get(4);
+        System.out.println("Ingrese su fecha de nacimiento (ÚNICAMENTE CON NÚMEROS)");
+        System.out.print("Día: ");
+        int dia = ConsoleReader.nextInt();
+        System.out.print("Mes: ");
+        int mes = ConsoleReader.nextInt();
+        System.out.print("Año: ");
+        int año = ConsoleReader.nextInt();
+        LocalDate fechaNacimiento = LocalDate.of(año, mes, dia);
         System.out.println("Ingrese su sector");
         System.out.print(">> ");
         String sector = sc.nextLine();
@@ -48,7 +55,7 @@ public class Gerente extends Usuario {
         System.out.print(">> ");
         double salary = sc.nextDouble();
         sc.nextLine();
-        Gerente gerente = new Gerente(nombre, apellido, numTelefono, sector, salary, rfc, contraseña, nombreUsuario);
+        Gerente gerente = new Gerente(nombre, apellido, numTelefono, sector, salary, rfc, contraseña, nombreUsuario, fechaNacimiento);
         Biblioteca.usuarios.get(Rol.GERENTE).add(gerente);
         System.out.println("¡El gerente ha sido registrado exitosamente!");
         System.out.println("ID de usuario: " + gerente.getId());

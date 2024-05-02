@@ -1,5 +1,6 @@
 package sistema.utils;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -7,6 +8,7 @@ import java.util.Scanner;
 import sistema.Biblioteca;
 import usuarios.Usuario;
 import usuarios.utils.Rol;
+import sistema.utils.*;
 
 public class DatosComun {
 

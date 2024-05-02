@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import sistema.*;
-import sistema.utils.DatosComun;
-import sistema.utils.Designer;
+import sistema.utils.*;
 
 public class Trabajador extends Usuario {
     private long rfc;
@@ -16,8 +15,8 @@ public class Trabajador extends Usuario {
 
     private static Scanner sc = new Scanner(System.in);
 
-    public Trabajador(String nombre, String apellido, String numeroTelefono, long rfc, double salary, String contraseña, String nombreUsuario) {
-        super(nombre, apellido, Rol.CLIENTE, numeroTelefono, contraseña, nombreUsuario);
+    public Trabajador(String nombre, String apellido, String numeroTelefono, long rfc, double salary, String contraseña, String nombreUsuario, LocalDate fechadeNacimiento) {
+        super(nombre, apellido, Rol.CLIENTE, numeroTelefono, contraseña, nombreUsuario, fechadeNacimiento);
         this.rfc = rfc;
         this.salary = salary;
         this.fechaDeContratacion = LocalDate.now();
@@ -35,6 +34,15 @@ public class Trabajador extends Usuario {
         String numTelefono = datosComun.get(2);
         String nombreUsuario = datosComun.get(3);
         String contraseña = datosComun.get(4);
+        System.out.println("Ingrese su fecha de nacimiento (ÚNICAMENTE CON NÚMEROS)");
+        System.out.print("Día: ");
+        int dia = ConsoleReader.nextInt();
+        System.out.print("Mes: ");
+        int mes = ConsoleReader.nextInt();
+        System.out.print("Año: ");
+        int año = ConsoleReader.nextInt();
+        LocalDate fechaNacimiento = LocalDate.of(año, mes, dia);
+        System.out.println("Ingrese su RFC:");
         System.out.print(">> ");
         long rfc = sc.nextLong();
         sc.nextLine();
@@ -42,7 +50,7 @@ public class Trabajador extends Usuario {
         System.out.print(">> ");
         double salary = sc.nextDouble();
         sc.nextLine();
-        Trabajador trabajador = new Trabajador(nombre, apellido, numTelefono, rfc, salary, contraseña, nombreUsuario);
+        Trabajador trabajador = new Trabajador(nombre, apellido, numTelefono, rfc, salary, contraseña, nombreUsuario, fechaNacimiento);
         Biblioteca.usuarios.get(Rol.TRABAJADOR).add(trabajador);
         System.out.println("¡El trabajador ha sido registrado exitosamente!");
         System.out.println("ID de usuario: " + trabajador.getId());

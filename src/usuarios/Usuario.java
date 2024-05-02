@@ -6,7 +6,7 @@ import java.util.*;
 import sistema.Biblioteca;
 import usuarios.utils.Rol;
 
-public class Usuario {
+public abstract class Usuario {
     private static int nextID = 1;
     private int id;
     private String nombre;
@@ -15,10 +15,11 @@ public class Usuario {
     private String contraseña;
     private String nombreUsuario;
     private LocalDate fechaDeRegistro;
+    private LocalDate fechadeNacimiento;
     private String numeroTelefono;
     private static Scanner sc = new Scanner(System.in);
 
-    public Usuario(String nombre, String apellido, Rol rol, String numeroTelefono, String contraseña, String nombreUsuario) {
+    public Usuario(String nombre, String apellido, Rol rol, String numeroTelefono, String contraseña, String nombreUsuario, LocalDate fechadeNacimiento) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.rol = rol;
@@ -28,6 +29,7 @@ public class Usuario {
         this.contraseña = contraseña;
         this.nombreUsuario = nombreUsuario;
         this.fechaDeRegistro = LocalDate.now();
+        this.fechadeNacimiento = fechadeNacimiento;
     }
 
     public static Usuario buscarUsuario(){

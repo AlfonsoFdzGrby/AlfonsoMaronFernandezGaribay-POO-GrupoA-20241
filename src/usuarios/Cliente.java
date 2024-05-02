@@ -11,8 +11,8 @@ public class Cliente extends Usuario {
     private LocalDate fechaDeRegistro;
     private static Scanner sc = new Scanner(System.in);
 
-    public Cliente(String nombre, String apellido, String numeroTelefono, String contraseña, String nombreUsuario) {
-        super(nombre, apellido, Rol.CLIENTE, numeroTelefono, contraseña, nombreUsuario);
+    public Cliente(String nombre, String apellido, String numeroTelefono, String contraseña, String nombreUsuario, LocalDate fechadeNacimiento) {
+        super(nombre, apellido, Rol.CLIENTE, numeroTelefono, contraseña, nombreUsuario, fechadeNacimiento);
         this.fechaDeRegistro = LocalDate.now();
     }
 
@@ -32,7 +32,15 @@ public class Cliente extends Usuario {
         String telefono = datosComun.get(2);
         String nombreusuario = datosComun.get(3);
         String contraseña = datosComun.get(4);
-        Cliente cliente = new Cliente(nombre, apellido, telefono, contraseña, nombreusuario);
+        System.out.println("Ingrese su fecha de nacimiento (ÚNICAMENTE CON NÚMEROS)");
+        System.out.print("Día: ");
+        int dia = ConsoleReader.nextInt();
+        System.out.print("Mes: ");
+        int mes = ConsoleReader.nextInt();
+        System.out.print("Año: ");
+        int año = ConsoleReader.nextInt();
+        LocalDate fechaNacimiento = LocalDate.of(año, mes, dia);
+        Cliente cliente = new Cliente(nombre, apellido, telefono, contraseña, nombreusuario, fechaNacimiento);
 
         Biblioteca.usuarios.get(Rol.CLIENTE).add(cliente);
         System.out.println("¡El cliente ha sido registrado correctamente!");

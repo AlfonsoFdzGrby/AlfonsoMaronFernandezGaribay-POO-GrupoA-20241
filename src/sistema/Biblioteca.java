@@ -1,5 +1,6 @@
 package sistema;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -19,11 +20,11 @@ public class Biblioteca {
         usuarios.put(Rol.CLIENTE, new ArrayList<Usuario>());
         usuarios.put(Rol.TRABAJADOR, new ArrayList<Usuario>());
         usuarios.put(Rol.GERENTE, new ArrayList<Usuario>());
-        agregarUsuario(new Cliente("Cliente", "1", "443566", "12345", "cliente1"), Rol.CLIENTE);
-        agregarUsuario(new Cliente("Cliente", "2", "443562", "12345", "cliente2"), Rol.CLIENTE);
-        agregarUsuario(new Trabajador("Trabajador", "1", "5316456", 1234529, 15000, "12345", "trabajador1"), Rol.TRABAJADOR);
-        agregarUsuario(new Trabajador("Trabajador", "2", "5316488", 1254529, 15000, "12345", "trabajador2"), Rol.TRABAJADOR);
-        agregarUsuario(new Gerente("Gerente", "1", "8798465", "El mero mero", 50000, 828288, "12345", "gerente1"), Rol.GERENTE);
+        agregarUsuario(new Cliente("Cliente", "1", "443566", "12345", "cliente1", LocalDate.of(05, 4, 1980)), Rol.CLIENTE);
+        agregarUsuario(new Cliente("Cliente", "2", "443562", "12345", "cliente2", LocalDate.of(05, 4, 1980)), Rol.CLIENTE);
+        agregarUsuario(new Trabajador("Trabajador", "1", "5316456", 1234529, 15000, "12345", "trabajador1", LocalDate.of(05, 4, 1980)), Rol.TRABAJADOR);
+        agregarUsuario(new Trabajador("Trabajador", "2", "5316488", 1254529, 15000, "12345", "trabajador2", LocalDate.of(23, 10, 2000)), Rol.TRABAJADOR);
+        agregarUsuario(new Gerente("Gerente", "1", "8798465", "El mero mero", 50000, 828288, "12345", "gerente1", LocalDate.of(05, 4, 1980)), Rol.GERENTE);
     }
 
     //---------------------------------------- MÉTODOS PÚBLICOS ----------------------------------------
