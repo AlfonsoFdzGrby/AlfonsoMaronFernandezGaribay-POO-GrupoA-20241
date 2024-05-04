@@ -2,10 +2,7 @@ package sistema;
 
 import java.util.Scanner;
 
-import usuarios.Cliente;
-import usuarios.Gerente;
-import usuarios.Trabajador;
-import usuarios.Usuario;
+import usuarios.*;
 import sistema.utils.*;
 import utils.*;
 

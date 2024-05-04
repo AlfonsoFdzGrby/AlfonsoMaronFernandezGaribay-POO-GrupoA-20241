@@ -1,7 +1,8 @@
 package usuarios;
 
 import usuarios.utils.Rol;
-import java.time.LocalDate;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 
 import sistema.*;
 import sistema.utils.*;
@@ -224,6 +225,20 @@ public class Gerente extends Usuario {
         }else{
             System.out.println("El gerente no ha sido eliminado");
         }
+        Designer.continuar();
+    }
+
+    public static void checarEntrada(Gerente gerente){
+        LocalDateTime entrada = LocalDateTime.now();
+        DateTimeFormatter formatoFechaHora = DateTimeFormatter.ofPattern("dd/MM/YYY a las HH:mm");
+        System.out.println("Hora de entrada del gerente " + gerente.getNombreCompleto() + ": " + entrada.format(formatoFechaHora));
+        Designer.continuar();
+    }
+
+    public static void checarSalida(Gerente gerente){
+        LocalDateTime salida = LocalDateTime.now();
+        DateTimeFormatter formatoFechaHora = DateTimeFormatter.ofPattern("dd/MM/YYY a las HH:mm");
+        System.out.println("Hora de salida del gerente " + gerente.getNombreCompleto() + ": " + salida.format(formatoFechaHora));
         Designer.continuar();
     }
 

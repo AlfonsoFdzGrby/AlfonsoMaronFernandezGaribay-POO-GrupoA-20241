@@ -1,9 +1,9 @@
 package usuarios;
 
 import usuarios.utils.Rol;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.time.*;
+import java.util.*;
+import java.time.format.DateTimeFormatter;
 
 import sistema.*;
 import sistema.utils.*;
@@ -213,6 +213,20 @@ public class Trabajador extends Usuario {
         for (Usuario usuarioAMostrar : Biblioteca.usuarios.get(Rol.TRABAJADOR)) {
             System.out.println("   * " + usuarioAMostrar.toString());
         }
+        Designer.continuar();
+    }
+
+    public static void checarEntrada(Trabajador trabajador){
+        LocalDateTime entrada = LocalDateTime.now();
+        DateTimeFormatter formatoFechaHora = DateTimeFormatter.ofPattern("dd/MM/YYY a las HH:mm");
+        System.out.println("Hora de entrada del trabajador " + trabajador.getNombreCompleto() + ": " + entrada.format(formatoFechaHora));
+        Designer.continuar();
+    }
+
+    public static void checarSalida(Trabajador trabajador){
+        LocalDateTime salida = LocalDateTime.now();
+        DateTimeFormatter formatoFechaHora = DateTimeFormatter.ofPattern("dd/MM/YYY a las HH:mm");
+        System.out.println("Hora de salida del trabajador " + trabajador.getNombreCompleto() + ": " + salida.format(formatoFechaHora));
         Designer.continuar();
     }
 
