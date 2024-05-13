@@ -235,6 +235,7 @@ public class Libro {
         Tools.next();
     }
 
+
     public String getAutor() {
         return autor;
     }
@@ -253,5 +254,13 @@ public class Libro {
 
     public String getInfoBasica(){
         return titulo + " de " + autor;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public Subgenero getSubgenero() {
+        return subgenero;
     }
 }

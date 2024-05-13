@@ -3,10 +3,14 @@ package sistema;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import libros.Genero;
 import libros.Libro;
+import libros.Subgenero;
 import usuarios.*;
 import sistema.utils.*;
 import usuarios.utils.*;
@@ -102,6 +106,7 @@ public class Biblioteca {
     }
 
     public static void listarLibros(){
+        System.out.println("");
         Tools.printHeader("LIBROS");
 
         System.out.println("ACCIÓN");
@@ -121,6 +126,27 @@ public class Biblioteca {
         for (Libro libro : libros.get(Genero.Terror)) {
             System.out.println("   * " + libro.getId() + "\t " + libro.getInfoBasica());
         }
+    }
+
+    public static void filtarLibrosPorStock(Genero genero, int stock){
+        List<Libro> librosStock = libros.get(genero)
+        .stream()
+        .filter(libro -> libro.getStock()>stock)
+        .collect(Collectors.toList());
+    }
+
+    public static void filtrarLibrosPorSubGenero(Genero genero, Subgenero subgenero){
+        List<Libro> librosSubgen = libros.get(genero)
+        .stream()
+        .filter(libro -> libro.getSubgenero().equals(subgenero))
+        .collect(Collectors.toList());
+    }
+
+    public static void filtarLibrosPorPrimeraLetra(Genero genero, char letra){
+        List<Libro> librosLetra = libros.get(genero)
+        .stream()
+        .filter(libro -> libro.getTitulo().charAt(0)==letra)
+        .collect(Collectors.toList());
     }
 
 }
