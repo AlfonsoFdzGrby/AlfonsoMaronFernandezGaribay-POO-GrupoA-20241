@@ -16,7 +16,7 @@ public class Libro {
     private String titulo;
     private String autor;
     private String editorial;
-    private LocalDate fechaPublicacion;
+    private String fechaPublicacion;
     private Genero genero;
     private Subgenero subgenero;
     private double precio;
@@ -27,7 +27,7 @@ public class Libro {
         this.titulo = titulo;
         this.autor = autor;
         this.editorial = editorial;
-        this.fechaPublicacion = fechaPublicacion;
+        this.fechaPublicacion = fechaPublicacion.toString();
         this.genero = genero;
         this.subgenero = subgenero;
         this.precio = precio;

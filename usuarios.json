@@ -1,17 +1,17 @@
 {
   "GERENTE": [
     {
-      "sector": "El mero mero",
+      "sector": "gerente",
       "salary": 50000.0,
       "rfc": 828288,
-      "fechaDeAsenso": "2024-05-16",
+      "fechaDeAsenso": "2024-05-17",
       "id": 5,
       "nombre": "Gerente",
       "apellido": "1",
       "rol": "GERENTE",
       "contraseña": "12345",
       "nombreUsuario": "gerente1",
-      "fechaDeRegistro": "2024-05-16",
+      "fechaDeRegistro": "2024-05-17",
       "fechadeNacimiento": "1980-04-05",
       "numeroTelefono": "8798465"
     }
@@ -24,7 +24,7 @@
       "rol": "CLIENTE",
       "contraseña": "12345",
       "nombreUsuario": "cliente1",
-      "fechaDeRegistro": "2024-05-16",
+      "fechaDeRegistro": "2024-05-17",
       "fechadeNacimiento": "1980-04-05",
       "numeroTelefono": "443566"
     },
@@ -35,7 +35,7 @@
       "rol": "CLIENTE",
       "contraseña": "12345",
       "nombreUsuario": "cliente2",
-      "fechaDeRegistro": "2024-05-16",
+      "fechaDeRegistro": "2024-05-17",
       "fechadeNacimiento": "1980-04-05",
       "numeroTelefono": "443562"
     }
@@ -43,7 +43,7 @@
   "TRABAJADOR": [
     {
       "rfc": 1234529,
-      "fechaDeContratacion": "2024-05-16",
+      "fechaDeContratacion": "2024-05-17",
       "salary": 15000.0,
       "id": 3,
       "nombre": "Trabajador",
@@ -51,13 +51,13 @@
       "rol": "CLIENTE",
       "contraseña": "12345",
       "nombreUsuario": "trabajador1",
-      "fechaDeRegistro": "2024-05-16",
+      "fechaDeRegistro": "2024-05-17",
       "fechadeNacimiento": "1980-04-05",
       "numeroTelefono": "5316456"
     },
     {
       "rfc": 1254529,
-      "fechaDeContratacion": "2024-05-16",
+      "fechaDeContratacion": "2024-05-17",
       "salary": 15000.0,
       "id": 4,
       "nombre": "Trabajador",
@@ -65,7 +65,7 @@
       "rol": "CLIENTE",
       "contraseña": "12345",
       "nombreUsuario": "trabajador2",
-      "fechaDeRegistro": "2024-05-16",
+      "fechaDeRegistro": "2024-05-17",
       "fechadeNacimiento": "1980-10-03",
       "numeroTelefono": "5316488"
     }

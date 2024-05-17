@@ -17,6 +17,7 @@ import sistema.utils.*;
 import usuarios.utils.*;
 import utils.Tools;
 import utils.UsuarioEnSesion;
+import utils.JSON.LibrosSerializer;
 import utils.JSON.UsuariosSerializer;
 
 public class Biblioteca {
@@ -30,6 +31,11 @@ public class Biblioteca {
         usuarios.put(Rol.CLIENTE, new ArrayList<Usuario>());
         usuarios.put(Rol.TRABAJADOR, new ArrayList<Usuario>());
         usuarios.put(Rol.GERENTE, new ArrayList<Usuario>());
+
+        libros.put(Genero.Acción, new ArrayList<>());
+        libros.put(Genero.Comedia, new ArrayList<>());
+        libros.put(Genero.Terror, new ArrayList<>());
+
         try {
             BufferedReader reader = new BufferedReader(new FileReader("usuarios.json"));
             if(reader.readLine()==null){
@@ -37,13 +43,31 @@ public class Biblioteca {
                 agregarUsuario(new Cliente("Cliente", "2", "443562", "12345", "cliente2", LocalDate.of(1980, 4, 5)), Rol.CLIENTE);
                 agregarUsuario(new Trabajador("Trabajador", "1", "5316456", 1234529, 15000, "12345", "trabajador1", LocalDate.of(1980, 4, 5)), Rol.TRABAJADOR);
                 agregarUsuario(new Trabajador("Trabajador", "2", "5316488", 1254529, 15000, "12345", "trabajador2", LocalDate.of(1980, 10, 3)), Rol.TRABAJADOR);
-                agregarUsuario(new Gerente("Gerente", "1", "8798465", "El mero mero", 50000, 828288, "12345", "gerente1", LocalDate.of(1980, 4, 5)), Rol.GERENTE);
+                agregarUsuario(new Gerente("Gerente", "1", "8798465", "gerente", 50000, 828288, "12345", "gerente1", LocalDate.of(1980, 4, 5)), Rol.GERENTE);
                 UsuariosSerializer.writeToJSON();
+                System.out.println("INFO: El programa se ha inicializado con usuarios predeterminados");
             }else{
                 UsuariosSerializer.readFromJSON();
+                System.out.println("INFO: Se han leído datos de 'usuarios.json'");
             }
         } catch (Exception e) {
-            System.out.println("Ha ocurrido un error. Asegúrse de que el archivo 'usuarios.json' exista");
+            System.out.println("ERROR: " + e);
+        }
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("libros.json"));
+            if(reader.readLine()==null){
+                agregarLibro(new Libro("1984", "George Orwell", "Planeta", LocalDate.of(2005, 3, 13), Genero.Terror, Subgenero.Psicológico, 15.33, 15), Genero.Terror);
+                agregarLibro(new Libro("La Divina Comedia", "Dante Alighieri", "Planeta", LocalDate.of(2005, 3, 13), Genero.Comedia, Subgenero.Sátira, 15.33, 15), Genero.Comedia);
+                agregarLibro(new Libro("Viaje a la Luna", "Julio Verne", "Planeta", LocalDate.of(2005, 3, 13), Genero.Acción, Subgenero.CienciaFicción, 15.33, 15), Genero.Acción);
+                LibrosSerializer.writeToJSON();
+                System.out.println("INFO: El programa se ha inicializado con libros predeterminados");
+            }else{
+                LibrosSerializer.readFromJSON();
+                System.out.println("INFO: Se han leído datos de 'libros.json'");
+            }
+        } catch (Exception e) {
+            System.out.println("ERROR: " + e);
         }
     }
 

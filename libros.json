@@ -1,0 +1,41 @@
+{
+  "Acción": [
+    {
+      "id": 3,
+      "titulo": "Viaje a la Luna",
+      "autor": "Julio Verne",
+      "editorial": "Planeta",
+      "fechaPublicacion": "2005-03-13",
+      "genero": "Acción",
+      "subgenero": "CienciaFicción",
+      "precio": 15.33,
+      "stock": 15
+    }
+  ],
+  "Terror": [
+    {
+      "id": 1,
+      "titulo": "1984",
+      "autor": "George Orwell",
+      "editorial": "Planeta",
+      "fechaPublicacion": "2005-03-13",
+      "genero": "Terror",
+      "subgenero": "Psicológico",
+      "precio": 15.33,
+      "stock": 15
+    }
+  ],
+  "Comedia": [
+    {
+      "id": 2,
+      "titulo": "La Divina Comedia",
+      "autor": "Dante Alighieri",
+      "editorial": "Planeta",
+      "fechaPublicacion": "2005-03-13",
+      "genero": "Comedia",
+      "subgenero": "Sátira",
+      "precio": 15.33,
+      "stock": 15
+    }
+  ]
+}

@@ -26,11 +26,9 @@ public class UsuariosSerializer {
 
     public static void readFromJSON(){
         try {
-            System.out.println("LEER JSON");
             BufferedReader reader = new BufferedReader(new FileReader("usuarios.json"));
             Gson json = new Gson();
             UsusariosModel model = json.fromJson(reader, UsusariosModel.class);
-            System.out.println("JSON leído");
             Biblioteca.usuarios.get(Rol.CLIENTE).addAll(model.getCLIENTE());
             Biblioteca.usuarios.get(Rol.TRABAJADOR).addAll(model.getTRABAJADOR());
             Biblioteca.usuarios.get(Rol.GERENTE).addAll(model.getGERENTE());
