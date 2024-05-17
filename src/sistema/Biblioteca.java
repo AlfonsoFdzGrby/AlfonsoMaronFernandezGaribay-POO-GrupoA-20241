@@ -1,5 +1,7 @@
 package sistema;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,19 +26,24 @@ public class Biblioteca {
     public static final HashMap<Rol, ArrayList<Usuario>> usuarios = new HashMap<Rol, ArrayList<Usuario>>();
     public static final HashMap<Genero, ArrayList<Libro>> libros = new HashMap<Genero, ArrayList<Libro>>();
 
-    public Biblioteca(boolean init){
+    public Biblioteca(){
         usuarios.put(Rol.CLIENTE, new ArrayList<Usuario>());
         usuarios.put(Rol.TRABAJADOR, new ArrayList<Usuario>());
         usuarios.put(Rol.GERENTE, new ArrayList<Usuario>());
-        if(init){
-            agregarUsuario(new Cliente("Cliente", "1", "443566", "12345", "cliente1", LocalDate.of(1980, 4, 5)), Rol.CLIENTE);
-            agregarUsuario(new Cliente("Cliente", "2", "443562", "12345", "cliente2", LocalDate.of(1980, 4, 5)), Rol.CLIENTE);
-            agregarUsuario(new Trabajador("Trabajador", "1", "5316456", 1234529, 15000, "12345", "trabajador1", LocalDate.of(1980, 4, 5)), Rol.TRABAJADOR);
-            agregarUsuario(new Trabajador("Trabajador", "2", "5316488", 1254529, 15000, "12345", "trabajador2", LocalDate.of(1980, 10, 3)), Rol.TRABAJADOR);
-            agregarUsuario(new Gerente("Gerente", "1", "8798465", "El mero mero", 50000, 828288, "12345", "gerente1", LocalDate.of(1980, 4, 5)), Rol.GERENTE);
-            UsuariosSerializer.writeToJSON();
-        }else{
-            UsuariosSerializer.readFromJSON();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("usuarios.json"));
+            if(reader.readLine()==null){
+                agregarUsuario(new Cliente("Cliente", "1", "443566", "12345", "cliente1", LocalDate.of(1980, 4, 5)), Rol.CLIENTE);
+                agregarUsuario(new Cliente("Cliente", "2", "443562", "12345", "cliente2", LocalDate.of(1980, 4, 5)), Rol.CLIENTE);
+                agregarUsuario(new Trabajador("Trabajador", "1", "5316456", 1234529, 15000, "12345", "trabajador1", LocalDate.of(1980, 4, 5)), Rol.TRABAJADOR);
+                agregarUsuario(new Trabajador("Trabajador", "2", "5316488", 1254529, 15000, "12345", "trabajador2", LocalDate.of(1980, 10, 3)), Rol.TRABAJADOR);
+                agregarUsuario(new Gerente("Gerente", "1", "8798465", "El mero mero", 50000, 828288, "12345", "gerente1", LocalDate.of(1980, 4, 5)), Rol.GERENTE);
+                UsuariosSerializer.writeToJSON();
+            }else{
+                UsuariosSerializer.readFromJSON();
+            }
+        } catch (Exception e) {
+            System.out.println("Ha ocurrido un error. Asegúrse de que el archivo 'usuarios.json' exista");
         }
     }
 

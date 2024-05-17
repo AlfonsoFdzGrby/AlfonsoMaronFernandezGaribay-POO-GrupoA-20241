@@ -5,17 +5,19 @@ import java.util.ArrayList;
 import usuarios.Usuario;
 
 public class UsusariosModel {
-    private ArrayList<Usuario> clientes;
-    private ArrayList<Usuario> trabajadores;
-    private ArrayList<Usuario> gerentes;
+    private ArrayList<Usuario> CLIENTE;
+    private ArrayList<Usuario> TRABAJADOR;
+    private ArrayList<Usuario> GERENTE;
+    
+    public ArrayList<Usuario> getCLIENTE() {
+        return CLIENTE;
+    }
+    public ArrayList<Usuario> getTRABAJADOR() {
+        return TRABAJADOR;
+    }
+    public ArrayList<Usuario> getGERENTE() {
+        return GERENTE;
+    }
 
-    public ArrayList<Usuario> getClientes() {
-        return clientes;
-    }
-    public ArrayList<Usuario> getTrabajadores() {
-        return trabajadores;
-    }
-    public ArrayList<Usuario> getGerentes() {
-        return gerentes;
-    }
+    
 }

@@ -8,7 +8,7 @@ import sistema.utils.*;
 import utils.*;
 
 public class Menu {
-    private static Biblioteca biblioteca = new Biblioteca(true);
+    private static Biblioteca biblioteca = new Biblioteca();
     private static UsuarioEnSesion usuarioEnSesion = UsuarioEnSesion.getInstancia();
     private static Scanner sc = new Scanner(System.in);
 

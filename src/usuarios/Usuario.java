@@ -6,7 +6,7 @@ import java.util.*;
 import sistema.Biblioteca;
 import usuarios.utils.Rol;
 
-public abstract class Usuario {
+public class Usuario {
     private static int nextID = 1;
     private int id;
     private String nombre;
