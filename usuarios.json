@@ -1,0 +1,73 @@
+{
+  "GERENTE": [
+    {
+      "sector": "El mero mero",
+      "salary": 50000.0,
+      "rfc": 828288,
+      "fechaDeAsenso": "2024-05-16",
+      "id": 5,
+      "nombre": "Gerente",
+      "apellido": "1",
+      "rol": "GERENTE",
+      "contraseña": "12345",
+      "nombreUsuario": "gerente1",
+      "fechaDeRegistro": "2024-05-16",
+      "fechadeNacimiento": "1980-04-05",
+      "numeroTelefono": "8798465"
+    }
+  ],
+  "CLIENTE": [
+    {
+      "id": 1,
+      "nombre": "Cliente",
+      "apellido": "1",
+      "rol": "CLIENTE",
+      "contraseña": "12345",
+      "nombreUsuario": "cliente1",
+      "fechaDeRegistro": "2024-05-16",
+      "fechadeNacimiento": "1980-04-05",
+      "numeroTelefono": "443566"
+    },
+    {
+      "id": 2,
+      "nombre": "Cliente",
+      "apellido": "2",
+      "rol": "CLIENTE",
+      "contraseña": "12345",
+      "nombreUsuario": "cliente2",
+      "fechaDeRegistro": "2024-05-16",
+      "fechadeNacimiento": "1980-04-05",
+      "numeroTelefono": "443562"
+    }
+  ],
+  "TRABAJADOR": [
+    {
+      "rfc": 1234529,
+      "fechaDeContratacion": "2024-05-16",
+      "salary": 15000.0,
+      "id": 3,
+      "nombre": "Trabajador",
+      "apellido": "1",
+      "rol": "CLIENTE",
+      "contraseña": "12345",
+      "nombreUsuario": "trabajador1",
+      "fechaDeRegistro": "2024-05-16",
+      "fechadeNacimiento": "1980-04-05",
+      "numeroTelefono": "5316456"
+    },
+    {
+      "rfc": 1254529,
+      "fechaDeContratacion": "2024-05-16",
+      "salary": 15000.0,
+      "id": 4,
+      "nombre": "Trabajador",
+      "apellido": "2",
+      "rol": "CLIENTE",
+      "contraseña": "12345",
+      "nombreUsuario": "trabajador2",
+      "fechaDeRegistro": "2024-05-16",
+      "fechadeNacimiento": "1980-10-03",
+      "numeroTelefono": "5316488"
+    }
+  ]
+}
